@@ -8,10 +8,15 @@ const Login = () => {
     console.log(data);
   };
 
+  const handleGoogleLogin = () => {
+    console.log("Google login clicked");
+    // এখানে তুমি Firebase Google Auth logic add করবে
+  };
+
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        
+
         {/* Heading */}
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-blue-600">Welcome Back</h2>
@@ -22,7 +27,6 @@ const Login = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          
           <div>
             <label className="label">
               <span className="label-text font-medium">Email</span>
@@ -47,10 +51,23 @@ const Login = () => {
             />
           </div>
 
-          <button className="btn btn-primary w-full mt-2">
-            Login
-          </button>
+          <button className="btn btn-primary w-full mt-2">Login</button>
         </form>
+
+        {/* OR Divider */}
+        <div className="flex items-center my-4">
+          <hr className="flex-1 border-gray-300" />
+          <span className="px-2 text-gray-400">OR</span>
+          <hr className="flex-1 border-gray-300" />
+        </div>
+
+        {/* Google Login Button */}
+        <button
+          onClick={handleGoogleLogin}
+          className="btn btn-outline btn-primary w-full"
+        >
+          Login with Google
+        </button>
 
         {/* Footer text */}
         <p className="text-center text-sm text-gray-500 mt-6">
