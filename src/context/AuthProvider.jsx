@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
@@ -12,18 +13,24 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // login user
+  // registation
   const loginHandle = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // login user
+  // login
   const registerHandle = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const logoutHandle = () =>{
-    return signOut(auth)
+  // logout
+  const logoutHandle = () => {
+    return signOut(auth);
+  };
+
+  // login with google
+  const googleLogin = () =>{
+    return signInWithPopup(auth)
   }
 
   useEffect(() => {
@@ -39,6 +46,7 @@ const AuthProvider = ({ children }) => {
     loginHandle,
     registerHandle,
     logoutHandle,
+    googleLogin,
     user,
     loading,
   };

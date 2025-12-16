@@ -8,7 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
-  const { registerHandle } = useAuth();
+  const { registerHandle, googleLogin } = useAuth();
   const navigate = useNavigate();
 
   // password show / hide state (default: hidden)
@@ -32,14 +32,19 @@ const Register = () => {
   };
 
   const handleGoogleRegister = () => {
-    console.log("Google register clicked");
-    // Firebase Google Auth logic add করবে
+    googleLogin()
+      .then(() => {
+        toast.success("Registration successful");
+        navigate("/");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
   };
 
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-
         {/* Heading */}
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-blue-600">Create Account</h2>
@@ -48,7 +53,6 @@ const Register = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
           {/* Full Name */}
           <div>
             <label className="label">
@@ -118,9 +122,7 @@ const Register = () => {
           </div>
 
           {/* Register Button */}
-          <button className="btn btn-primary w-full mt-2">
-            Register
-          </button>
+          <button className="btn btn-primary w-full mt-2">Register</button>
         </form>
 
         {/* OR Divider */}
@@ -148,7 +150,6 @@ const Register = () => {
             Login
           </Link>
         </p>
-
       </div>
     </div>
   );

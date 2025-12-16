@@ -1,34 +1,39 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-    const {loginHandle} = useAuth();
-
+  const navigate = useNavigate();
+  const { loginHandle, googleLogin } = useAuth();
 
   const onSubmit = (data) => {
     console.log(data);
 
     loginHandle(data.email, data.password)
-    .then(()=>{
+      .then(() => {
         console.log("login successfully");
-    })
-    .catch(e=>{
+      })
+      .catch((e) => {
         console.log(e.message);
-    })
-
+      });
   };
 
   const handleGoogleLogin = () => {
-    console.log("Google login clicked");
-    // এখানে তুমি Firebase Google Auth logic add করবে
+    googleLogin()
+      .then(() => {
+        toast.success("Login successful");
+        navigate("/");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
   };
 
   return (
     <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-
         {/* Heading */}
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-blue-600">Welcome Back</h2>
@@ -84,7 +89,10 @@ const Login = () => {
         {/* Footer text */}
         <p className="text-center text-sm text-gray-500 mt-6">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-blue-600 font-medium hover:underline">
+          <Link
+            to="/register"
+            className="text-blue-600 font-medium hover:underline"
+          >
             Register
           </Link>
         </p>
