@@ -1,11 +1,23 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+    const {loginHandle} = useAuth();
+
 
   const onSubmit = (data) => {
     console.log(data);
+
+    loginHandle(data.email, data.password)
+    .then(()=>{
+        console.log("login successfully");
+    })
+    .catch(e=>{
+        console.log(e.message);
+    })
+
   };
 
   const handleGoogleLogin = () => {
