@@ -7,7 +7,7 @@ import AllScholarships from "../components/common/Scholarships/AllScholarships/A
 import ScholarshipDetails from "../components/common/Scholarships/ScholarshipDetails.jsx/ScholarshipDetails";
 import LearnMore from "../components/LandingPage/LearnMore";
 import PaymentSuccess from "../pages/Payments/PaymentSuccess";
-import PrivateRoutes from "../contexts/ProtecedRoutes/PrivateRoutes";
+
 import HowItWorks from "../pages/FooterPages/HowItWorks";
 import Blog from "../pages/FooterPages/Blog";
 import HelpCenter from "../pages/FooterPages/HelpCenter";
@@ -29,8 +29,10 @@ import ManageScholarships from "../pages/Dashboard/Admin/ManageScholarships";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import ManageApplications from "../pages/Dashboard/Moderator/ManageApplications";
 import AllReviews from "../pages/Dashboard/Moderator/AllReviews";
-import AdminRoute from "../contexts/ProtecedRoutes/AdminRoute";
-import ModeratorRoute from "../contexts/ProtecedRoutes/ModeratorRoute";
+
+import PrivateRoutes from "../context/ProtecedRoutes/PrivateRoutes";
+import AdminRoute from "../context/ProtecedRoutes/AdminRoute";
+import ModeratorRoute from "../context/ProtecedRoutes/ModeratorRoute";
 
 const router = createBrowserRouter([
   {
