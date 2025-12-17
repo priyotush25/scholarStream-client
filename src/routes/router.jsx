@@ -7,7 +7,7 @@ import AllScholarships from "../components/common/Scholarships/AllScholarships/A
 import ScholarshipDetails from "../components/common/Scholarships/ScholarshipDetails.jsx/ScholarshipDetails";
 import LearnMore from "../components/LandingPage/LearnMore";
 import PaymentSuccess from "../pages/Payments/PaymentSuccess";
-
+import PrivateRoutes from "../contexts/ProtecedRoutes/PrivateRoutes";
 import HowItWorks from "../pages/FooterPages/HowItWorks";
 import Blog from "../pages/FooterPages/Blog";
 import HelpCenter from "../pages/FooterPages/HelpCenter";
@@ -29,66 +29,65 @@ import ManageScholarships from "../pages/Dashboard/Admin/ManageScholarships";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import ManageApplications from "../pages/Dashboard/Moderator/ManageApplications";
 import AllReviews from "../pages/Dashboard/Moderator/AllReviews";
-
-import PrivateRoutes from "../context/ProtecedRoutes/PrivateRoutes";
-import AdminRoute from "../context/ProtecedRoutes/AdminRoute";
-import ModeratorRoute from "../context/ProtecedRoutes/ModeratorRoute";
+import AdminRoute from "../contexts/ProtecedRoutes/AdminRoute";
+import ModeratorRoute from "../contexts/ProtecedRoutes/ModeratorRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     hydrateFallbackElement: <Loader />,
     errorElement: <Error />,
-    element: <Root />, // এখানে Component -> element
+    Component: Root,
     children: [
       {
         index: true,
-        element: <HomeLayout />, // Component -> element
+        Component: HomeLayout,
       },
       {
         path: "/login",
-        element: <Login />, // Component -> element
+        Component: Login,
       },
       {
         path: "/register",
-        element: <Register />, // Component -> element
+        Component: Register,
       },
       {
         path: "/how-it-works",
-        element: <HowItWorks />,
+        Component: HowItWorks,
       },
       {
         path: "/faq",
-        element: <LearnMore />,
+        Component: LearnMore,
       },
       {
         path: "/blog",
-        element: <Blog />,
+        Component: Blog,
       },
       {
         path: "/help-center",
-        element: <HelpCenter />,
+        Component: HelpCenter,
       },
       {
         path: "/contact-us",
-        element: <ContactUs />,
+        Component: ContactUs,
       },
       {
         path: "/success-stories",
-        element: <SuccessStories />,
+        Component: SuccessStories,
       },
       {
         path: "/privacy-policy",
-        element: <PrivacyPolicy />,
+        Component: PrivacyPolicy,
       },
       {
         path: "/forbidden",
-        element: <Forbidden />,
+        Component: Forbidden,
       },
       {
         path: "/unauthorized",
-        element: <Unauthorized />,
+        Component: Unauthorized,
       },
+
       {
         path: "/all-scholarships",
         element: (
@@ -107,11 +106,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment-success",
-        element: <PaymentSuccess />,
+        Component: PaymentSuccess,
       },
       {
         path: "/payment-cancelled",
-        element: <PaymentFailed />,
+        Component: PaymentFailed,
       },
     ],
   },
@@ -125,19 +124,19 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashboardHome />, // Component -> element
+        Component: DashboardHome,
       },
       {
         path: "my-profile",
-        element: <MyProfile />,
+        Component: MyProfile,
       },
       {
         path: "my-applications",
-        element: <MyApplications />,
+        Component: MyApplications,
       },
       {
         path: "my-reviews",
-        element: <MyReviews />,
+        Component: MyReviews,
       },
       {
         path: "add-scholarship",
