@@ -29,7 +29,7 @@ const Register = () => {
       fromData.append("image", profileImage);
 
       const imageAPI = `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_image_host
+        import.meta.env.VITE_IMAGE_HOST
       }`;
 
       axios.post(imageAPI, fromData).then((res) => {

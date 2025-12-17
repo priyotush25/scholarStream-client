@@ -1,0 +1,92 @@
+[
+{
+"universityName": "Stanford University",
+"userName": "Sarah Martinez",
+"userEmail": "sarah.martinez@example.com",
+"userImage": "https://via.placeholder.com/150?text=SM",
+"ratingPoint": 5,
+"reviewComment": "ScholarStream helped me find $45,000 in scholarships! The platform made it so easy to discover opportunities I never knew existed.",
+"reviewDate": "2025-11-15"
+},
+{
+"universityName": "University of California, Berkeley",
+"userName": "John Doe",
+"userEmail": "john.doe@example.com",
+"userImage": "https://via.placeholder.com/150?text=JD",
+"ratingPoint": 5,
+"reviewComment": "Thanks to ScholarStream, I secured a full-ride scholarship. It simplified my search and connected me with perfect opportunities.",
+"reviewDate": "2025-12-01"
+},
+{
+"universityName": "Harvard University",
+"userName": "Ijeoma Okoro",
+"userEmail": "ijeoma.okoro@example.com",
+"userImage": "https://via.placeholder.com/150?text=IO",
+"ratingPoint": 4,
+"reviewComment": "The AI matching saved me hours! I found scholarships tailored to my Mechanical Engineering major and got $20,000 in aid.",
+"reviewDate": "2025-11-20"
+},
+{
+"universityName": "MIT",
+"userName": "Jesús Ramirez",
+"userEmail": "jesus.ramirez@example.com",
+"userImage": "https://via.placeholder.com/150?text=JR",
+"ratingPoint": 5,
+"reviewComment": "As a first-generation student, ScholarStream guided me to scholarships that made college possible without debt.",
+"reviewDate": "2025-12-05"
+},
+{
+"universityName": "University of Texas",
+"userName": "Daniel Lee",
+"userEmail": "daniel.lee@example.com",
+"userImage": "https://via.placeholder.com/150?text=DL",
+"ratingPoint": 5,
+"reviewComment": "I won multiple awards totaling $30,000 for my Education program. The platform's tools were invaluable.",
+"reviewDate": "2025-11-25"
+},
+{
+"universityName": "Virginia Tech",
+"userName": "Neiver Morales Perez",
+"userEmail": "neiver.perez@example.com",
+"userImage": "https://via.placeholder.com/150?text=NP",
+"ratingPoint": 5,
+"reviewComment": "ScholarStream helped me secure leadership scholarships that covered my tuition and more. Truly life-changing!",
+"reviewDate": "2025-12-03"
+},
+{
+"universityName": "New College of Florida",
+"userName": "Nisha Patel",
+"userEmail": "nisha.patel@example.com",
+"userImage": "https://via.placeholder.com/150?text=NP",
+"ratingPoint": 5,
+"reviewComment": "I competed against thousands and won a full scholarship through ScholarStream's resources. Amazing support!",
+"reviewDate": "2025-11-18"
+},
+{
+"universityName": "Houston Community College",
+"userName": "Rosa Gonzalez",
+"userEmail": "rosa.gonzalez@example.com",
+"userImage": "https://via.placeholder.com/150?text=RG",
+"ratingPoint": 4,
+"reviewComment": "From a small town to college success – ScholarStream made applying easy and helped me win $15,000.",
+"reviewDate": "2025-12-07"
+},
+{
+"universityName": "University of Kansas",
+"userName": "Tina Pruna",
+"userEmail": "tina.pruna@example.com",
+"userImage": "https://via.placeholder.com/150?text=TP",
+"ratingPoint": 5,
+"reviewComment": "The journalism scholarships I found here allowed me to focus on my studies without financial worry.",
+"reviewDate": "2025-11-22"
+},
+{
+"universityName": "Marquette University",
+"userName": "Jenn Kim",
+"userEmail": "jenn.kim@example.com",
+"userImage": "https://via.placeholder.com/150?text=JK",
+"ratingPoint": 5,
+"reviewComment": "ScholarStream opened doors to higher education I never thought possible. Secured $25,000 in aid!",
+"reviewDate": "2025-12-09"
+}
+]
