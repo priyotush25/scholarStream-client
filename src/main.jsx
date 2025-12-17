@@ -1,16 +1,19 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { ToastContainer} from 'react-toastify';
-import "./index.css";
-import { RouterProvider } from "react-router";
-import Router from "./routes/Router";
-import AuthProvider from "./context/AuthProvider";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import { RouterProvider } from 'react-router'
+import router from './routes/router.jsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Root from './pages/Root/Root.jsx'
+import AuthProvider from './contexts/AuthProvider/AuthProvider.jsx'
 
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={Router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
-     <ToastContainer />
   </StrictMode>
 );

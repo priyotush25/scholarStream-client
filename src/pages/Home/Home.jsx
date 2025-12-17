@@ -1,9 +1,10 @@
 import React from 'react';
+import AllScholarships from '../AllScholarships/AllScholarships';
 
 const Home = () => {
     return (
         <div>
-            home
+           <AllScholarships/>
         </div>
     );
 };

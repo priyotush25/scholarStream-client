@@ -27,7 +27,10 @@ const Navbar = () => {
               <NavLink to="/" className="hover:text-blue-600">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/scholarships" className="hover:text-blue-600">All Scholarships</NavLink>
+              <NavLink to="/allscholarship" className="hover:text-blue-600">All Scholarships</NavLink>
+            </li>
+                        <li>
+              <NavLink to="/addcholarship" className="hover:text-blue-600">Add Scholarships</NavLink>
             </li>
           </ul>
         </div>
@@ -82,7 +85,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white rounded-box w-52"
           >
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/scholarships">All Scholarships</Link></li>
+            <li><Link to="/allscholarship">All Scholarships</Link></li>
 
             {user ? (
               <>

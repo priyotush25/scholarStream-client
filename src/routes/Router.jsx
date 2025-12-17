@@ -4,6 +4,9 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import AllScholarships from "../pages/AllScholarships/AllScholarships";
+import AddScholarship from "../pages/AddScholarship/AddScholarship";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = createBrowserRouter([
   {
@@ -22,6 +25,16 @@ const Router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+      {
+        path: "/allscholarship",
+        element: <AllScholarships/>
+      },
+      {
+        path: "/addcholarship",
+        element: <PrivateRoute>
+          <AddScholarship/>
+        </PrivateRoute>
+      }
     ],
   },
 ]);

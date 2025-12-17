@@ -13,10 +13,10 @@ const Login = () => {
 
     loginHandle(data.email, data.password)
       .then(() => {
-        console.log("login successfully");
+        toast.success("Login successful");
       })
       .catch((e) => {
-        console.log(e.message);
+         toast.error(e.message);
       });
   };
 
