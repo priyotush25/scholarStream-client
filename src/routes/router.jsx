@@ -39,57 +39,56 @@ const router = createBrowserRouter([
     path: "/",
     hydrateFallbackElement: <Loader />,
     errorElement: <Error />,
-    Component: Root,
+    element: <Root />, // এখানে Component -> element
     children: [
       {
         index: true,
-        Component: HomeLayout,
+        element: <HomeLayout />, // Component -> element
       },
       {
         path: "/login",
-        Component: Login,
+        element: <Login />, // Component -> element
       },
       {
         path: "/register",
-        Component: Register,
+        element: <Register />, // Component -> element
       },
       {
         path: "/how-it-works",
-        Component: HowItWorks,
+        element: <HowItWorks />,
       },
       {
         path: "/faq",
-        Component: LearnMore,
+        element: <LearnMore />,
       },
       {
         path: "/blog",
-        Component: Blog,
+        element: <Blog />,
       },
       {
         path: "/help-center",
-        Component: HelpCenter,
+        element: <HelpCenter />,
       },
       {
         path: "/contact-us",
-        Component: ContactUs,
+        element: <ContactUs />,
       },
       {
         path: "/success-stories",
-        Component: SuccessStories,
+        element: <SuccessStories />,
       },
       {
         path: "/privacy-policy",
-        Component: PrivacyPolicy,
+        element: <PrivacyPolicy />,
       },
       {
         path: "/forbidden",
-        Component: Forbidden,
+        element: <Forbidden />,
       },
       {
         path: "/unauthorized",
-        Component: Unauthorized,
+        element: <Unauthorized />,
       },
-
       {
         path: "/all-scholarships",
         element: (
@@ -108,11 +107,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment-success",
-        Component: PaymentSuccess,
+        element: <PaymentSuccess />,
       },
       {
         path: "/payment-cancelled",
-        Component: PaymentFailed,
+        element: <PaymentFailed />,
       },
     ],
   },
@@ -126,19 +125,19 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: DashboardHome,
+        element: <DashboardHome />, // Component -> element
       },
       {
         path: "my-profile",
-        Component: MyProfile,
+        element: <MyProfile />,
       },
       {
         path: "my-applications",
-        Component: MyApplications,
+        element: <MyApplications />,
       },
       {
         path: "my-reviews",
-        Component: MyReviews,
+        element: <MyReviews />,
       },
       {
         path: "add-scholarship",

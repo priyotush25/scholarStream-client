@@ -3,47 +3,51 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 
 import { AuthContext } from './AuthContext';
 import { auth } from '../../firebase/firebase.config';
-const googleProvider = new GoogleAuthProvider()
+
+const googleProvider = new GoogleAuthProvider();
+
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const register = (email, password) => {
-        setLoading(true)
-      return  createUserWithEmailAndPassword(auth, email , password)
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email , password);
     }
+
     const signIn = (email,password) => {
-                setLoading(true);
-
-       return signInWithEmailAndPassword(auth, email, password)
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
     }
+
     const logOut = () => {
-        setLoading(true)
-       return signOut(auth)
+        setLoading(true);
+        return signOut(auth);
     }
-    const updateUser = (profile) => {
-        return updateProfile(auth.currentUser, profile)
-    }
-    const signInGoogle = () => {
-                setLoading(true);
 
-        return signInWithPopup(auth,googleProvider)
+    const updateUser = (profile) => {
+        return updateProfile(auth.currentUser, profile);
     }
+
+    const signInGoogle = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
     const resetPass = (email) => {
-        setLoading(true)
-       return sendPasswordResetEmail(auth, email)
+        setLoading(true);
+        return sendPasswordResetEmail(auth, email);
     }
+
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser)
-            setLoading(false)
+            setUser(currentUser);
+            setLoading(false);
             console.log(currentUser);
-            
-        })
-        return () => {
-            unSubscribe()
-        }
-    },[])
+        });
+        return () => unSubscribe();
+    }, []);
+
     const authInfo = {
         register,
         signIn,
@@ -54,10 +58,11 @@ const AuthProvider = ({ children }) => {
         updateUser,
         resetPass
     }
+
     return (
-        <AuthContext value={authInfo}>
+        <AuthContext.Provider value={authInfo}>
             {children}
-        </AuthContext>
+        </AuthContext.Provider>
     );
 };
 
