@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "../../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
 import {
   FaUniversity,
   FaGlobe,
@@ -13,16 +14,32 @@ import {
   FaImage,
 } from "react-icons/fa";
 
-const AddScholarship = () => {
+const UpdateScholarship = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [scholarship, setScholarship] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`/scholarships/${id}`)
+      .then((res) => {
+        setScholarship(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        alert("Failed to load scholarship");
+        setLoading(false);
+      });
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setSubmitting(true);
     const form = e.target;
-    const scholarship = {
+    const updatedScholarship = {
       scholarshipName: form.scholarshipName.value,
       universityName: form.universityName.value,
       universityImage: form.universityImage.value,
@@ -36,20 +53,28 @@ const AddScholarship = () => {
       applicationFees: parseInt(form.applicationFees.value),
       serviceCharge: parseInt(form.serviceCharge.value),
       applicationDeadline: form.applicationDeadline.value,
-      postedUserEmail: user.email,
-      scholarshipPostDate: new Date(),
     };
 
     try {
-      const res = await axios.post("/scholarships", scholarship);
-      alert("Scholarship added successfully");
+      const res = await axios.patch(`/scholarships/${id}`, updatedScholarship);
+      alert("Scholarship updated successfully");
       navigate("/dashboard/manage-scholarships");
     } catch (error) {
       const errorMsg = error.response?.data?.message || error.message;
-      alert(`Failed to add scholarship: ${errorMsg}`);
+      alert(`Failed to update scholarship: ${errorMsg}`);
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
+  };
+
+  if (loading) return <LoadingSpinner />;
+  if (!scholarship) return <div>Scholarship not found</div>;
+
+  // Format date for input (YYYY-MM-DD)
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0];
   };
 
   const SectionHeader = ({ icon: Icon, title }) => (
@@ -63,9 +88,9 @@ const AddScholarship = () => {
     <div className="w-full max-w-4xl mx-auto p-4 lg:p-8">
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white text-center">
-          <h2 className="text-3xl font-bold mb-2">Create New Scholarship</h2>
+          <h2 className="text-3xl font-bold mb-2">Update Scholarship</h2>
           <p className="opacity-90">
-            Publish a new opportunity for students worldwide
+            Edit scholarship details and requirements
           </p>
         </div>
 
@@ -81,6 +106,7 @@ const AddScholarship = () => {
                 <input
                   type="text"
                   name="scholarshipName"
+                  defaultValue={scholarship.scholarshipName}
                   placeholder="e.g. Global Excellence Scholarship"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -102,6 +128,7 @@ const AddScholarship = () => {
                 <input
                   type="text"
                   name="universityName"
+                  defaultValue={scholarship.universityName}
                   placeholder="e.g. Harvard University"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -115,8 +142,9 @@ const AddScholarship = () => {
                   </span>
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   name="universityImage"
+                  defaultValue={scholarship.universityImage}
                   placeholder="https://..."
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -132,6 +160,7 @@ const AddScholarship = () => {
                 <input
                   type="text"
                   name="universityCountry"
+                  defaultValue={scholarship.universityCountry}
                   placeholder="e.g. USA"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -147,6 +176,7 @@ const AddScholarship = () => {
                 <input
                   type="text"
                   name="universityCity"
+                  defaultValue={scholarship.universityCity}
                   placeholder="e.g. Cambridge"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -162,6 +192,7 @@ const AddScholarship = () => {
                 <input
                   type="number"
                   name="universityWorldRank"
+                  defaultValue={scholarship.universityWorldRank}
                   placeholder="e.g. 1"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -183,12 +214,10 @@ const AddScholarship = () => {
                 </label>
                 <select
                   name="subjectCategory"
+                  defaultValue={scholarship.subjectCategory}
                   className="select select-bordered focus:select-primary h-12"
                   required
                 >
-                  <option disabled selected>
-                    Select Subject
-                  </option>
                   <option value="Agriculture">Agriculture</option>
                   <option value="Engineering">Engineering</option>
                   <option value="Doctor">Doctor</option>
@@ -201,12 +230,10 @@ const AddScholarship = () => {
                 </label>
                 <select
                   name="scholarshipCategory"
+                  defaultValue={scholarship.scholarshipCategory}
                   className="select select-bordered focus:select-primary h-12"
                   required
                 >
-                  <option disabled selected>
-                    Select Category
-                  </option>
                   <option value="Full Fund">Full Fund</option>
                   <option value="Partial">Partial</option>
                   <option value="Self-fund">Self-fund</option>
@@ -219,12 +246,10 @@ const AddScholarship = () => {
                 </label>
                 <select
                   name="degree"
+                  defaultValue={scholarship.degree}
                   className="select select-bordered focus:select-primary h-12"
                   required
                 >
-                  <option disabled selected>
-                    Select Degree
-                  </option>
                   <option value="Diploma">Diploma</option>
                   <option value="Bachelor">Bachelor</option>
                   <option value="Masters">Masters</option>
@@ -242,6 +267,7 @@ const AddScholarship = () => {
                 <input
                   type="number"
                   name="tuitionFees"
+                  defaultValue={scholarship.tuitionFees}
                   placeholder="Optional"
                   className="input input-bordered focus:input-primary h-12"
                 />
@@ -254,6 +280,7 @@ const AddScholarship = () => {
                 <input
                   type="number"
                   name="applicationFees"
+                  defaultValue={scholarship.applicationFees}
                   placeholder="e.g. 50"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -267,6 +294,7 @@ const AddScholarship = () => {
                 <input
                   type="number"
                   name="serviceCharge"
+                  defaultValue={scholarship.serviceCharge}
                   placeholder="e.g. 10"
                   className="input input-bordered focus:input-primary h-12"
                   required
@@ -286,6 +314,7 @@ const AddScholarship = () => {
                 <input
                   type="date"
                   name="applicationDeadline"
+                  defaultValue={formatDate(scholarship.applicationDeadline)}
                   className="input input-bordered focus:input-primary h-12"
                   required
                 />
@@ -304,10 +333,10 @@ const AddScholarship = () => {
             </button>
             <button
               type="submit"
-              className={`btn btn-primary px-8 ${loading ? "loading" : ""}`}
-              disabled={loading}
+              className={`btn btn-primary px-8 ${submitting ? "loading" : ""}`}
+              disabled={submitting}
             >
-              {loading ? "Publishing..." : "Add Scholarship"}
+              {submitting ? "Updating..." : "Update Scholarship"}
             </button>
           </div>
         </form>
@@ -316,4 +345,4 @@ const AddScholarship = () => {
   );
 };
 
-export default AddScholarship;
+export default UpdateScholarship;

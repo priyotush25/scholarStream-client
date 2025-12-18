@@ -1,197 +1,213 @@
-import React, { useState } from "react";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import Swal from "sweetalert2";
-import { PiTrash, PiUserCheck, PiUserGear, PiUserList, PiUserSwitch } from "react-icons/pi";
-import useAuth from "../../../hooks/useAuth";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
+import axios from "../../../api/axios";
+import LoadingSpinner from "../../../components/common/LoadingSpinner";
 
 const ManageUsers = () => {
-  const axiosSecure = useAxiosSecure();
-  const { user: currentUser } = useAuth()
-  const [filterRole, setFilterRole] = useState("");
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [loading, setLoading] = useState(true);
 
-  const {
-    data: users = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["manage-users"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/users");
-      return res.data;
-    },
-  });
-
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "User will be permanently deleted!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete user!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            Swal.fire("Deleted!", "User has been deleted.", "success");
-            refetch();
-          }
-        });
-      }
-    });
+  const fetchUsers = () => {
+    setLoading(true);
+    axios
+      .get("/users")
+      .then((res) => {
+        setUsers(res.data);
+        setFilteredUsers(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
   };
 
-  const handleRoleChange = (id, newRole) => {
-    axiosSecure
-      .patch(`/users/${id}/role`, { role: newRole })
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    if (roleFilter === "all") {
+      setFilteredUsers(users);
+    } else {
+      setFilteredUsers(users.filter((user) => user.role === roleFilter));
+    }
+  }, [roleFilter, users]);
+
+  const handleMakeAdmin = (user) => {
+    axios
+      .patch(`/users/role/${user._id}`, { role: "admin" })
       .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          Swal.fire("Success", `User role updated to ${newRole}!`, "success");
-          refetch();
+        if (res.data) {
+          alert(`${user.name} is an Admin now`);
+          fetchUsers();
         }
       })
-      .catch(() => Swal.fire("Error", "Failed to update role.", "error"));
+      .catch((err) => {
+        console.error("Make admin failed:", err);
+        alert("Failed to make user admin");
+      });
   };
 
-  const filteredUsers = filterRole
-    ? users.filter((u) => u.role === filterRole)
-    : users;
+  const handleMakeModerator = (user) => {
+    axios
+      .patch(`/users/role/${user._id}`, { role: "moderator" })
+      .then((res) => {
+        if (res.data) {
+          alert(`${user.name} is a Moderator now`);
+          fetchUsers();
+        }
+      })
+      .catch((err) => {
+        console.error("Make moderator failed:", err);
+        alert("Failed to make user moderator");
+      });
+  };
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center p-10">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
+  const handleMakeStudent = (user) => {
+    axios
+      .patch(`/users/role/${user._id}`, { role: "student" })
+      .then((res) => {
+        if (res.data) {
+          alert(`${user.name} is a Student now`);
+          fetchUsers();
+        }
+      })
+      .catch((err) => {
+        console.error("Make student failed:", err);
+        alert("Failed to make user student");
+      });
+  };
+
+  const handleDeleteUser = (user) => {
+    if (window.confirm(`Delete ${user.name}?`)) {
+      axios
+        .delete(`/users/${user._id}`)
+        .then((res) => {
+          if (res.data) {
+            alert("User deleted");
+            fetchUsers();
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="card bg-base-100 shadow-xl h-full">
-      <div className="card-body">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="card-title text-2xl">
-            Manage Users ({filteredUsers.length})
-          </h2>
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-3xl font-bold">Manage Users</h2>
+
+        {/* Role Filter */}
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text font-medium">Filter by Role:</span>
+          </label>
           <select
             className="select select-bordered"
-            onChange={(e) => setFilterRole(e.target.value)}
-            value={filterRole}
+            value={roleFilter}
+            onChange={(e) => setRoleFilter(e.target.value)}
           >
-            <option value="">All Roles</option>
-            <option value="student">Student</option>
-            <option value="moderator">Moderator</option>
-            <option value="admin">Admin</option>
+            <option value="all">All Roles</option>
+            <option value="student">Students</option>
+            <option value="moderator">Moderators</option>
+            <option value="admin">Admins</option>
           </select>
         </div>
+      </div>
 
-        <div className="overflow-x-auto">
-          <table className="table table-zebra w-full">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map((user) => (
-                <tr key={user._id}>
-                  <td>{user.displayName}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    <div
-                      className={`badge ${
-                        user.role === "admin" || user.role === "super-admin"
-                          ? "badge-primary"
-                          : user.role === "moderator"
-                          ? "badge-secondary"
-                          : "badge-ghost"
-                      } capitalize`}
-                    >
-                      {user.role}
+      <div className="overflow-x-auto bg-white rounded-xl shadow-sm">
+        <table className="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredUsers.map((user) => (
+              <tr key={user._id}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="w-10 h-10 rounded-full">
+                        <img
+                          src={
+                            user.photoURL || "https://via.placeholder.com/40"
+                          }
+                          alt={user.name}
+                        />
+                      </div>
                     </div>
-                  </td>
-                  <td
-                    className={`flex gap-2 items-center flex-wrap ${
-                      user.role === "super-admin" && "hidden"
+                    <div className="font-semibold">{user.name}</div>
+                  </div>
+                </td>
+                <td>{user.email}</td>
+                <td>
+                  <span
+                    className={`badge ${
+                      user.role === "admin"
+                        ? "badge-error"
+                        : user.role === "moderator"
+                        ? "badge-warning"
+                        : "badge-info"
                     }`}
                   >
-                    {/* Simplified Actions with Dropdown or Buttons */}
-                    {user.email === currentUser.email ? (
+                    {user.role}
+                  </span>
+                </td>
+                <td>
+                  <div className="flex gap-2">
+                    {user.role !== "admin" && (
                       <button
-                        onClick={() =>
-                          toast.error(
-                            "Cannot change own-self, Please contact admin"
-                          )
-                        }
-                        className="btn btn-ghost btn-xs text-warning"
+                        onClick={() => handleMakeAdmin(user)}
+                        className="btn btn-xs btn-primary"
                       >
-                        <PiUserCheck />
+                        Make Admin
                       </button>
-                    ) : (
-                      <div className="dropdown dropdown-left dropdown-hover ">
-                        <div
-                          tabIndex={0}
-                          role="button"
-                          className="btn btn-ghost btn-xs"
-                        >
-                          <PiUserSwitch className="text-lg" />
-                        </div>
-                        <ul
-                          tabIndex={0}
-                          className="dropdown-content z-1 menu p-2 shadow bg-base-100 rounded-box w-52"
-                        >
-                          <li>
-                            <button
-                              onClick={() =>
-                                handleRoleChange(user._id, "student")
-                              }
-                            >
-                              Make Student
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              onClick={() =>
-                                handleRoleChange(user._id, "moderator")
-                              }
-                            >
-                              Make Moderator
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              onClick={() =>
-                                handleRoleChange(user._id, "admin")
-                              }
-                            >
-                              Make Admin
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
                     )}
-
+                    {user.role !== "moderator" && (
+                      <button
+                        onClick={() => handleMakeModerator(user)}
+                        className="btn btn-xs btn-secondary"
+                      >
+                        Make Moderator
+                      </button>
+                    )}
+                    {user.role !== "student" && (
+                      <button
+                        onClick={() => handleMakeStudent(user)}
+                        className="btn btn-xs btn-accent"
+                      >
+                        Make Student
+                      </button>
+                    )}
                     <button
-                      onClick={() => handleDelete(user._id)}
-                      className='btn btn-ghost btn-xs tooltip'
-                      data-tip="Delete User"
+                      onClick={() => handleDeleteUser(user)}
+                      className="btn btn-xs btn-error"
                     >
-                      <PiTrash className="text-lg text-error" />
+                      Delete
                     </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
+      {filteredUsers.length === 0 && (
+        <div className="text-center py-8 text-gray-500">
+          No users found with role: {roleFilter}
+        </div>
+      )}
     </div>
   );
 };
 
 export default ManageUsers;
-

@@ -1,184 +1,214 @@
-import { createBrowserRouter } from "react-router";
-import Root from "../pages/Root/Root";
-import HomeLayout from "../Layouts/HomeLayout/HomeLayout";
-import Login from "../components/Auth/Login/Login";
-import Register from "../components/Auth/Register/Register";
-import AllScholarships from "../components/common/Scholarships/AllScholarships/AllScholarships";
-import ScholarshipDetails from "../components/common/Scholarships/ScholarshipDetails.jsx/ScholarshipDetails";
-import LearnMore from "../components/LandingPage/LearnMore";
-import PaymentSuccess from "../pages/Payments/PaymentSuccess";
-import PrivateRoutes from "../contexts/ProtecedRoutes/PrivateRoutes";
-import HowItWorks from "../pages/FooterPages/HowItWorks";
-import Blog from "../pages/FooterPages/Blog";
-import HelpCenter from "../pages/FooterPages/HelpCenter";
-import ContactUs from "../pages/FooterPages/ContactUs";
-import SuccessStories from "../pages/FooterPages/SuccessStories";
-import PrivacyPolicy from "../pages/FooterPages/PrivacyPolicy";
-import Loader from "../components/common/Loader/Loader";
-import Error from "../pages/Errors/Error";
-import Forbidden from "../pages/Errors/Forbidden";
-import Unauthorized from "../pages/Errors/Unauthorized";
-import MainDashboard from "../Layouts/Dashboard/MainDashboard";
-import MyProfile from "../pages/Dashboard/common/MyProfile";
-import MyApplications from "../components/Student/MyApplications";
+import { createBrowserRouter } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "../components/common/PrivateRoute";
+import PublicRoute from "../components/common/PublicRoute";
+
+import Home from "../pages/Home";
+import AllScholarships from "../pages/AllScholarships";
+import ScholarshipDetails from "../pages/ScholarshipDetails";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import Checkout from "../pages/Checkout";
+import PaymentSuccess from "../pages/PaymentSuccess";
+import PaymentFailed from "../pages/PaymentFailed";
+import NotFound from "../pages/NotFound";
+
+// Dashboard Pages
 import DashboardHome from "../pages/Dashboard/DashboardHome";
-import PaymentFailed from "../pages/Payments/PaymentFailed";
-import MyReviews from "../components/Student/MyReviews";
+import Profile from "../pages/Dashboard/Profile";
+
+// Admin
 import AddScholarship from "../pages/Dashboard/Admin/AddScholarship";
-import ManageScholarships from "../pages/Dashboard/Admin/ManageScholarships";
+import UpdateScholarship from "../pages/Dashboard/Admin/UpdateScholarship";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
+import ManageScholarships from "../pages/Dashboard/Admin/ManageScholarships";
+import Analytics from "../pages/Dashboard/Admin/Analytics";
+
+// Moderator
 import ManageApplications from "../pages/Dashboard/Moderator/ManageApplications";
-import AllReviews from "../pages/Dashboard/Moderator/AllReviews";
-import AdminRoute from "../contexts/ProtecedRoutes/AdminRoute";
-import ModeratorRoute from "../contexts/ProtecedRoutes/ModeratorRoute";
+import ManageReviews from "../pages/Dashboard/Moderator/ManageReviews";
+
+// Student
+import MyApplications from "../pages/Dashboard/Student/MyApplications";
+import EditApplication from "../pages/Dashboard/Student/EditApplication";
+import MyReviews from "../pages/Dashboard/Student/MyReviews";
+import MyWishlist from "../pages/Dashboard/Student/MyWishlist";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    hydrateFallbackElement: <Loader />,
-    errorElement: <Error />,
-    Component: Root,
+    element: <MainLayout />,
+    errorElement: <NotFound />,
     children: [
       {
-        index: true,
-        Component: HomeLayout,
+        path: "/",
+        element: <Home />,
       },
       {
-        path: "/login",
-        Component: Login,
+        path: "scholarships",
+        element: <AllScholarships />,
       },
       {
-        path: "/register",
-        Component: Register,
+        path: "scholarship/:id",
+        element: <ScholarshipDetails />,
       },
       {
-        path: "/how-it-works",
-        Component: HowItWorks,
-      },
-      {
-        path: "/faq",
-        Component: LearnMore,
-      },
-      {
-        path: "/blog",
-        Component: Blog,
-      },
-      {
-        path: "/help-center",
-        Component: HelpCenter,
-      },
-      {
-        path: "/contact-us",
-        Component: ContactUs,
-      },
-      {
-        path: "/success-stories",
-        Component: SuccessStories,
-      },
-      {
-        path: "/privacy-policy",
-        Component: PrivacyPolicy,
-      },
-      {
-        path: "/forbidden",
-        Component: Forbidden,
-      },
-      {
-        path: "/unauthorized",
-        Component: Unauthorized,
-      },
-
-      {
-        path: "/all-scholarships",
+        path: "login",
         element: (
-          <PrivateRoutes>
-            <AllScholarships />
-          </PrivateRoutes>
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
         ),
       },
       {
-        path: "/scholarship-details/:id",
+        path: "register",
         element: (
-          <PrivateRoutes>
-            <ScholarshipDetails />
-          </PrivateRoutes>
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
         ),
       },
       {
-        path: "/payment-success",
-        Component: PaymentSuccess,
+        path: "about",
+        element: <About />,
       },
       {
-        path: "/payment-cancelled",
-        Component: PaymentFailed,
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "checkout/:id",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment-success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "payment-failed",
+        element: <PaymentFailed />,
       },
     ],
   },
   {
     path: "/dashboard",
     element: (
-      <PrivateRoutes>
-        <MainDashboard />
-      </PrivateRoutes>
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
     ),
     children: [
       {
         index: true,
-        Component: DashboardHome,
+        element: <DashboardHome />,
       },
       {
-        path: "my-profile",
-        Component: MyProfile,
+        path: "profile",
+        element: <Profile />,
       },
+      // Admin Routes
       {
-        path: "my-applications",
-        Component: MyApplications,
-      },
-      {
-        path: "my-reviews",
-        Component: MyReviews,
+        path: "manage-users",
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <ManageUsers />
+          </PrivateRoute>
+        ),
       },
       {
         path: "add-scholarship",
         element: (
-          <AdminRoute>
+          <PrivateRoute requiredRole="admin">
             <AddScholarship />
-          </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-scholarship/:id",
+        element: (
+          <PrivateRoute requiredRole="admin">
+            <UpdateScholarship />
+          </PrivateRoute>
         ),
       },
       {
         path: "manage-scholarships",
         element: (
-          <AdminRoute>
+          <PrivateRoute requiredRole="admin">
             <ManageScholarships />
-          </AdminRoute>
+          </PrivateRoute>
         ),
       },
       {
-        path: "manage-users",
+        path: "analytics",
         element: (
-          <AdminRoute>
-            <ManageUsers />
-          </AdminRoute>
+          <PrivateRoute requiredRole="admin">
+            <Analytics />
+          </PrivateRoute>
         ),
       },
+      // Moderator Routes
       {
         path: "manage-applications",
         element: (
-          <ModeratorRoute>
+          <PrivateRoute requiredRole="moderator">
             <ManageApplications />
-          </ModeratorRoute>
+          </PrivateRoute>
         ),
       },
       {
-        path: "all-reviews",
+        path: "manage-reviews",
         element: (
-          <ModeratorRoute>
-            <AllReviews />
-          </ModeratorRoute>
+          <PrivateRoute requiredRole="moderator">
+            <ManageReviews />
+          </PrivateRoute>
+        ),
+      },
+      // Student Routes
+      {
+        path: "my-applications",
+        element: (
+          <PrivateRoute requiredRole="student">
+            <MyApplications />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-wishlist",
+        element: (
+          <PrivateRoute requiredRole="student">
+            <MyWishlist />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "edit-application/:id",
+        element: (
+          <PrivateRoute requiredRole="student">
+            <EditApplication />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-reviews",
+        element: (
+          <PrivateRoute requiredRole="student">
+            <MyReviews />
+          </PrivateRoute>
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
