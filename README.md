@@ -1,84 +1,94 @@
-# ScholarStream - Scholarship Management System
+ScholarStream – Scholarship Management System
 
-ScholarStream is a comprehensive web application designed to connect students with scholarship opportunities worldwide. It simplifies the scholarship search and application process while providing universities with a robust platform to manage their listings.
+ScholarStream is a comprehensive platform connecting students with scholarship opportunities worldwide. It simplifies the scholarship search and application process while offering universities a robust platform to manage their listings.
 
-## 🔗 Live URL
-**[Click Here](https://scholar-stream-791d1.web.app/)**
+🔗 Live Demo
 
-## 🌟 Purpose
-The goal of ScholarStream is to democratize education funding by aggregating scholarship data and offering streamlined application workflows. It serves three main user roles:
-- **Students**: Search, view, and apply for scholarships.
-- **Moderators/Admins**: Manage listings, reviews, and users.
+ScholarStream Live
 
-## ✨ Key Features
+🌟 Purpose
 
-### 🎓 For Students
-- **Smart Search**: Filter scholarships by university, degree, or country.
-- **Dashboard**: Track application statuses and reviews.
-- **Payment Integration**: Secure payment gateway for application fees.
-- **Responsive Design**: Mobile-friendly interface for on-the-go access.
+ScholarStream aims to democratize education funding by aggregating scholarship data and streamlining applications. It serves three main user roles:
 
-### 🛡️ For Admins & Moderators
-- **Dashboard & Analytics**: Visual insights (charts/graphs) on applications and user growth.
-- **Scholarship Management**: Add, edit, or delete scholarship listings.
-- **Review System**: Moderate feedback and reviews from users.
-- **User Management**: Manage user roles and permissions.
+Students: Search, view, and apply for scholarships.
 
-## 🛠️ Technology Stack
+Moderators/Admins: Manage listings, reviews, and users.
 
-### Frontend Core
-- **[React](https://react.dev/)**: Javascript library for building user interfaces.
-- **[Vite](https://vitejs.dev/)**: Next-generation frontend tooling for fast builds.
-- **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first CSS framework for styling.
-- **[DaisyUI](https://daisyui.com/)**: Component library for Tailwind CSS.
+✨ Key Features
+🎓 Students
 
-### Key Libraries & Packages
-- **Routing**: `react-router`
-- **State & Data Fetching**: `@tanstack/react-query`
-- **Forms**: `react-hook-form`
-- **Authentication**: `firebase` (Integrated via custom hooks)
-- **UI & Animations**: `framer-motion`, `swiper` (sliders), `react-icons`
-- **Notifications**: `react-toastify`, `sweetalert2`
-- **Date Handling**: `dayjs`
-- **HTTP Client**: `axios` (Integrated via `useAxiosSecure`)
+Smart Search: Filter scholarships by university, degree, or country.
 
-## 🚀 Getting Started
+Dashboard: Track application status and reviews.
 
-### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+Payment Integration: Secure gateway for application fees.
 
-### Installation
+Responsive Design: Mobile-friendly interface for on-the-go access.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/armanislams/scholar-stream-client.git 
-   cd scholar-stream-client
-   ```
+🛡️ Admins & Moderators
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+Dashboard & Analytics: Visual insights with charts and graphs.
 
-3. **Set up Environment Variables:**
-   Create a `.env.local` file in the root directory and add your Firebase/Backend keys:
-   ```env
-   VITE_apiKey=your_api_key
-   VITE_authDomain=your_auth_domain
-   VITE_projectId=your_project_id
-   ...
-   ```
+Scholarship Management: Add, edit, or delete listings.
 
-4. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+Review System: Moderate user feedback.
 
-5. **Build for production:**
-   ```bash
-   npm run build
-   ```
+User Management: Control roles and permissions.
 
-## 📄 License
-This project is licensed under the MIT License.
+🛠️ Technology Stack
+Frontend
+
+React – UI library
+
+Vite – Fast build tooling
+
+Tailwind CSS & DaisyUI – Styling and components
+
+Key Libraries
+
+Routing: react-router
+
+State & Data Fetching: @tanstack/react-query
+
+Forms: react-hook-form
+
+Authentication: firebase (with custom hooks)
+
+UI & Animations: framer-motion, swiper, react-icons
+
+Notifications: react-toastify, sweetalert2
+
+Date Handling: dayjs
+
+HTTP Client: axios (via useAxiosSecure)
+
+🚀 Getting Started
+Prerequisites
+
+Node.js v18+
+
+npm or yarn
+
+Installation
+git clone https://github.com/armanislams/scholar-stream-client.git
+cd scholar-stream-client
+npm install
+
+Setup Environment
+
+Create .env.local in the root:
+
+VITE_apiKey=your_api_key
+VITE_authDomain=your_auth_domain
+VITE_projectId=your_project_id
+...
+
+Run Development Server
+npm run dev
+
+Build for Production
+npm run build
+
+📄 License
+
+MIT License
