@@ -27,7 +27,7 @@ const ScholarshipCard = ({ scholarship, hasApplied = false, reviews = [] }) => {
 
   return (
     <div
-      className={`card w-96 bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 ${
+      className={`card w-full bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 ${
         hasApplied ? "border-2 border-success" : ""
       }`}
     >
