@@ -3,8 +3,17 @@ ScholarStream – Scholarship Management System
 ScholarStream is a comprehensive platform connecting students with scholarship opportunities worldwide. It simplifies the scholarship search and application process while offering universities a robust platform to manage their listings.
 
 🔗 Live Demo
+   https://scholar-stream-priyo.netlify.app/
 
-ScholarStream Live
+
+   admin@gmail.com
+   Hello@123
+
+   student@gmail.com
+   Student@123
+
+   moderator@gmail.com
+   Moderator@123
 
 🌟 Purpose
 
@@ -70,7 +79,7 @@ Node.js v18+
 npm or yarn
 
 Installation
-git clone https://github.com/armanislams/scholar-stream-client.git
+git clone https://github.com/priyotush25/scholarStream-client.git
 cd scholar-stream-client
 npm install
 
