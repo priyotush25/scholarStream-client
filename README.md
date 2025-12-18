@@ -2,22 +2,21 @@ ScholarStream – Scholarship Management System
 
 ScholarStream is a comprehensive platform connecting students with scholarship opportunities worldwide. It simplifies the scholarship search and application process while offering universities a robust platform to manage their listings.
 
-🔗 Live Demo
-   https://scholar-stream-priyo.netlify.app/
+🔗 Live Demo: https://scholar-stream-priyo.netlify.app/
 
-
-   admin@gmail.com
-   Hello@123
-
-   student@gmail.com
-   Student@123
-
-   moderator@gmail.com
-   Moderator@123
-
+🧑‍💻 Demo Accounts
+Role	Email	Password
+Admin	admin@gmail.com
+	Hello@123
+Student	student@gmail.com
+	Student@123
+Moderator	moderator@gmail.com
+	Moderator@123
 🌟 Purpose
 
-ScholarStream aims to democratize education funding by aggregating scholarship data and streamlining applications. It serves three main user roles:
+ScholarStream aims to democratize education funding by aggregating scholarship data and streamlining applications.
+
+It serves three main user roles:
 
 Students: Search, view, and apply for scholarships.
 
@@ -61,7 +60,7 @@ State & Data Fetching: @tanstack/react-query
 
 Forms: react-hook-form
 
-Authentication: firebase (with custom hooks)
+Authentication: Firebase (with custom hooks)
 
 UI & Animations: framer-motion, swiper, react-icons
 
@@ -85,12 +84,12 @@ npm install
 
 Setup Environment
 
-Create .env.local in the root:
+Create .env.local in the root folder with the following variables:
 
 VITE_apiKey=your_api_key
 VITE_authDomain=your_auth_domain
 VITE_projectId=your_project_id
-...
+# Add other Firebase and API keys as needed
 
 Run Development Server
 npm run dev
@@ -100,4 +99,4 @@ npm run build
 
 📄 License
 
-MIT License
+This project is licensed under the MIT License.
