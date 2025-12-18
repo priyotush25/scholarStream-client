@@ -1,102 +1,76 @@
-ScholarStream – Scholarship Management System
+# 🎓 ScholarStream – Scholarship Management System
 
-ScholarStream is a comprehensive platform connecting students with scholarship opportunities worldwide. It simplifies the scholarship search and application process while offering universities a robust platform to manage their listings.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://scholar-stream-priyo.netlify.app/)
 
-🔗 Live Demo: https://scholar-stream-priyo.netlify.app/
+**ScholarStream** is a comprehensive platform connecting students with scholarship opportunities worldwide. It simplifies the scholarship search and application process while offering universities a robust platform to manage their listings.  
 
-🧑‍💻 Demo Accounts
-Role	Email	Password
-Admin	admin@gmail.com
-	Hello@123
-Student	student@gmail.com
-	Student@123
-Moderator	moderator@gmail.com
-	Moderator@123
-🌟 Purpose
+---
 
-ScholarStream aims to democratize education funding by aggregating scholarship data and streamlining applications.
+## 🧑‍💻 Demo Accounts
 
-It serves three main user roles:
+| Role       | Email                 | Password        |
+|------------|---------------------|----------------|
+| Admin      | admin@gmail.com      | Hello@123      |
+| Student    | student@gmail.com    | Student@123    |
+| Moderator  | moderator@gmail.com  | Moderator@123  |
 
-Students: Search, view, and apply for scholarships.
+---
 
-Moderators/Admins: Manage listings, reviews, and users.
+## 🌟 Purpose
 
-✨ Key Features
-🎓 Students
+ScholarStream aims to **democratize education funding** by aggregating scholarship data and streamlining applications.  
 
-Smart Search: Filter scholarships by university, degree, or country.
+**User Roles:**
 
-Dashboard: Track application status and reviews.
+- **Students:** Search, view, and apply for scholarships.  
+- **Moderators/Admins:** Manage listings, reviews, and users.  
 
-Payment Integration: Secure gateway for application fees.
+---
 
-Responsive Design: Mobile-friendly interface for on-the-go access.
+## ✨ Key Features
 
-🛡️ Admins & Moderators
+### 🎓 Students
+- **Smart Search:** Filter scholarships by university, degree, or country.  
+- **Dashboard:** Track application status and reviews.  
+- **Payment Integration:** Secure gateway for application fees.  
+- **Responsive Design:** Mobile-friendly interface for on-the-go access.  
 
-Dashboard & Analytics: Visual insights with charts and graphs.
+### 🛡️ Admins & Moderators
+- **Dashboard & Analytics:** Visual insights with charts and graphs.  
+- **Scholarship Management:** Add, edit, or delete listings.  
+- **Review System:** Moderate user feedback.  
+- **User Management:** Control roles and permissions.  
 
-Scholarship Management: Add, edit, or delete listings.
+---
 
-Review System: Moderate user feedback.
+## 🛠️ Technology Stack
 
-User Management: Control roles and permissions.
+**Frontend:**
+- React  
+- Vite  
+- Tailwind CSS & DaisyUI  
 
-🛠️ Technology Stack
-Frontend
+**Key Libraries:**
+- Routing: `react-router`  
+- State & Data Fetching: `@tanstack/react-query`  
+- Forms: `react-hook-form`  
+- Authentication: Firebase (custom hooks)  
+- UI & Animations: `framer-motion`, `swiper`, `react-icons`  
+- Notifications: `react-toastify`, `sweetalert2`  
+- Date Handling: `dayjs`  
+- HTTP Client: `axios` (via `useAxiosSecure`)  
 
-React – UI library
+---
 
-Vite – Fast build tooling
+## 🚀 Getting Started
 
-Tailwind CSS & DaisyUI – Styling and components
+### Prerequisites
+- Node.js v18+  
+- npm or yarn  
 
-Key Libraries
-
-Routing: react-router
-
-State & Data Fetching: @tanstack/react-query
-
-Forms: react-hook-form
-
-Authentication: Firebase (with custom hooks)
-
-UI & Animations: framer-motion, swiper, react-icons
-
-Notifications: react-toastify, sweetalert2
-
-Date Handling: dayjs
-
-HTTP Client: axios (via useAxiosSecure)
-
-🚀 Getting Started
-Prerequisites
-
-Node.js v18+
-
-npm or yarn
-
-Installation
+### Installation
+```bash
 git clone https://github.com/priyotush25/scholarStream-client.git
 cd scholar-stream-client
 npm install
-
-Setup Environment
-
-Create .env.local in the root folder with the following variables:
-
-VITE_apiKey=your_api_key
-VITE_authDomain=your_auth_domain
-VITE_projectId=your_project_id
-# Add other Firebase and API keys as needed
-
-Run Development Server
-npm run dev
-
-Build for Production
-npm run build
-
-📄 License
-
-This project is licensed under the MIT License.
