@@ -13,6 +13,7 @@ import {
   FaBookOpen,
   FaImage,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const AddScholarship = () => {
   const { user } = useContext(AuthContext);
@@ -40,11 +41,13 @@ const AddScholarship = () => {
 
     try {
       await axios.post("/scholarships", scholarship);
-      alert("Scholarship added successfully");
+      toast.success("Scholarship added successfully")
       navigate("/dashboard/manage-scholarships");
     } catch (error) {
       const errorMsg = error.response?.data?.message || error.message;
-      alert(`Failed to add scholarship: ${errorMsg}`);
+
+         toast.success(`Failed to add scholarship: ${errorMsg}`)
+
     } finally {
       setLoading(false);
     }
@@ -60,11 +63,10 @@ const AddScholarship = () => {
   return (
     <div className="w-full max-w-4xl mx-auto p-4 lg:p-8">
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white text-center">
+
+
+        <div className="bg-linear-to-r from-blue-600 to-indigo-600 p-6 text-white text-center">
           <h2 className="text-3xl font-bold mb-2">Create New Scholarship</h2>
-          <p className="opacity-90">
-            Publish a new opportunity for students worldwide
-          </p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="p-6 lg:p-8 space-y-8">
@@ -73,7 +75,7 @@ const AddScholarship = () => {
             <SectionHeader icon={FaBookOpen} title="Scholarship Information" />
             <div className="grid grid-cols-1 gap-6">
               <div className="form-control">
-                <label className="label font-medium text-gray-700">
+                <label className="label font-medium text-gray-700 mr-2">
                   Scholarship Name
                 </label>
                 <input
