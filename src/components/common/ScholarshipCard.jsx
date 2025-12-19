@@ -15,56 +15,58 @@ const ScholarshipCard = ({ scholarship, hasApplied = false, reviews = [] }) => {
     applicationDeadline,
   } = scholarship;
 
-  // Calculate average rating from reviews
-  const averageRating =
+  // Average rating
+  const avgRating =
     reviews.length > 0
       ? (
-          reviews.reduce((sum, review) => sum + review.ratingPoint, 0) /
-          reviews.length
+          reviews.reduce((sum, r) => sum + r.ratingPoint, 0) / reviews.length
         ).toFixed(1)
       : 0;
   const reviewCount = reviews.length;
 
   return (
-    <div
-      className={`card w-full bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 ${
-        hasApplied ? "border-2 border-success" : ""
-      }`}
-    >
-      <figure className="relative">
+    <div className="bg-white rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-transform duration-300 overflow-hidden border border-gray-200">
+      <div className="relative">
         <img
           src={universityImage}
           alt={universityName}
-          className="h-48 w-full object-cover"
+          className="w-full h-52 object-cover"
         />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+
         {hasApplied && (
-          <div className="absolute top-2 right-2 badge badge-success badge-lg gap-2">
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              className="w-3 h-3"
               fill="none"
               viewBox="0 0 24 24"
-              className="inline-block w-4 h-4 stroke-current"
+              stroke="currentColor"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M5 13l4 4L19 7"
-              ></path>
+              />
             </svg>
-            Already Applied
-          </div>
+            Applied
+          </span>
         )}
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">
-          {universityName}
-          <div className="badge badge-secondary">{scholarshipCategory}</div>
-        </h2>
+
+        <span className="absolute bottom-3 left-3 bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+          {scholarshipCategory}
+        </span>
+      </div>
+
+      <div className="p-5 flex flex-col gap-3">
+        <h3 className="text-lg font-bold text-gray-800">{universityName}</h3>
         <p className="text-sm text-gray-500">
           {universityCity}, {universityCountry}
         </p>
-        <div className="flex flex-col gap-1 my-2">
+
+        <div className="flex flex-col gap-1 text-sm text-gray-700">
           <p>
             <strong>Subject:</strong> {subjectCategory}
           </p>
@@ -75,33 +77,29 @@ const ScholarshipCard = ({ scholarship, hasApplied = false, reviews = [] }) => {
             <strong>Deadline:</strong>{" "}
             {new Date(applicationDeadline).toLocaleDateString()}
           </p>
-
-          {/* Student Reviews and Rating */}
-          <div className="flex items-center gap-2 mt-2">
-            {reviewCount > 0 ? (
-              <>
-                <div className="flex items-center gap-1">
-                  <FaStar className="text-yellow-400 text-lg" />
-                  <span className="font-bold text-gray-800">
-                    {averageRating}
-                  </span>
-                </div>
-                <span className="text-sm text-gray-600">
-                  ({reviewCount} {reviewCount === 1 ? "review" : "reviews"})
-                </span>
-              </>
-            ) : (
-              <span className="text-sm text-gray-500 italic">
-                No reviews yet
-              </span>
-            )}
-          </div>
         </div>
-        <div className="card-actions justify-end">
+
+        {/* Reviews */}
+        <div className="flex items-center justify-between mt-2">
+          {reviewCount > 0 ? (
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <FaStar className="text-yellow-400" />
+                <span className="font-semibold text-gray-800">{avgRating}</span>
+              </div>
+              <span className="text-xs text-gray-500">
+                ({reviewCount} {reviewCount === 1 ? "review" : "reviews"})
+              </span>
+            </div>
+          ) : (
+            <span className="text-xs text-gray-400 italic">No reviews yet</span>
+          )}
           <Link
             to={`/scholarship/${_id}`}
-            className={`btn btn-sm ${
-              hasApplied ? "btn-outline btn-success" : "btn-primary"
+            className={`px-3 py-1 rounded-lg text-sm font-medium shadow-md transition hover:shadow-lg ${
+              hasApplied
+                ? "border border-green-600 text-green-600 hover:bg-green-50"
+                : "bg-indigo-600 text-white hover:bg-indigo-700"
             }`}
           >
             {hasApplied ? "View Status" : "Details"}

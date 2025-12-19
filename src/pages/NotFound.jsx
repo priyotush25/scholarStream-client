@@ -3,51 +3,52 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 px-4">
-      <div className="text-center">
-        {/* 404 Illustration */}
-        <div className="mb-8">
-          <h1 className="text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-pink-50 to-yellow-50 px-4">
+      <div className="text-center max-w-lg">
+        
+        {/* Custom Illustration */}
+        <div className="mb-10">
+          <div className="text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-orange-500">
             404
-          </h1>
-          <div className="text-6xl mb-4">🎓</div>
+          </div>
+          <div className="text-5xl mb-4">📚</div>
         </div>
 
-        {/* Error Message */}
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">
-          Page Not Found
+        {/* Custom Error Message */}
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+          Oops! Page Missing
         </h2>
-        <p className="text-gray-600 mb-8 max-w-md mx-auto">
-          Oops! The scholarship you're looking for seems to have been awarded
-          already. Let's get you back on track to finding your perfect
-          opportunity.
+        <p className="text-gray-700 mb-8">
+          The scholarship or page you are looking for seems to have vanished.
+          No worries, we’ll help you get back on track to your next opportunity.
         </p>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/"
-            className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:shadow-lg transition"
+            className="px-6 py-3 bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white rounded-lg font-semibold shadow-md hover:scale-105 transition-transform"
           >
-            Go Home
+            Back to Home
           </Link>
           <Link
             to="/scholarships"
-            className="px-8 py-3 bg-white text-purple-600 border-2 border-purple-600 rounded-lg font-semibold hover:bg-purple-50 transition"
+            className="px-6 py-3 border-2 border-red-500 text-red-500 rounded-lg font-semibold hover:bg-red-50 transition-colors"
           >
-            Browse Scholarships
+            Explore Scholarships
           </Link>
         </div>
 
-        {/* Additional Help */}
-        <div className="mt-12 text-sm text-gray-500">
+        {/* Extra Help */}
+        <div className="mt-10 text-sm text-gray-500">
           <p>
-            Need help?{" "}
-            <Link to="/contact" className="text-purple-600 hover:underline">
-              Contact Support
+            Still need help?{" "}
+            <Link to="/contact" className="text-red-500 hover:underline">
+              Reach Support
             </Link>
           </p>
         </div>
+
       </div>
     </div>
   );
