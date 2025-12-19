@@ -9,8 +9,7 @@ const SuccessStories = () => {
       name: "Sarah Jen",
       location: "San Francisco, USA",
       university: "Stanford University",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80",
+      image: "https://randomuser.me/api/portraits/women/76.jpg",
       quote:
         "ScholarStream simplified the overwhelming search process. I found a full-ride scholarship that I wouldn't have discovered otherwise!",
       rating: 5,
@@ -20,10 +19,9 @@ const SuccessStories = () => {
       name: "Michael Chen",
       location: "Toronto, Canada",
       university: "University of Toronto",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80",
+      image: "https://randomuser.me/api/portraits/men/47.jpg",
       quote:
-        "The application tracking tools are a lifesaver. I managed 15 applications effortlessly and secured funding for my Master's.",
+        "The application tracking tools are a lifesaver. I managed multiple applications effortlessly and secured funding for my Master's.",
       rating: 5,
     },
     {
@@ -31,113 +29,124 @@ const SuccessStories = () => {
       name: "Amara Okonkwo",
       location: "London, UK",
       university: "Imperial College London",
-      image:
-        "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80",
+      image: "https://randomuser.me/api/portraits/men/4.jpg",
       quote:
-        "I was about to give up on my study abroad dreams due to funding. ScholarStream connected me with a niche grant for engineering students.",
+        "I was close to giving up on studying abroad. ScholarStream connected me with a niche engineering grant that changed everything.",
       rating: 4,
     },
   ];
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-50 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-x-1/2 translate-y-1/2"></div>
+    <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+
+      {/* Decorative Gradients */}
+      <div className="absolute top-0 left-1/4 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-purple-200 rounded-full blur-3xl opacity-20"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+
+        {/* ================= HEADER ================= */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-purple-600 font-bold uppercase tracking-wider text-sm"
+            className="inline-block mb-4"
           >
-            Student Voices
-          </motion.span>
+            <span className="px-6 py-2 rounded-full text-sm font-semibold text-white
+              bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md">
+              Student Success
+            </span>
+          </motion.div>
+
           <motion.h2
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl font-bold text-gray-800 mt-2 mb-4"
+            className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-5"
           >
-            Real Stories, Real Success
+            Real Stories. Real Impact.
           </motion.h2>
+
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-600 text-lg"
+            className="text-gray-600 text-lg leading-relaxed"
           >
-            Join the community of students who have transformed their academic
-            futures through ScholarStream.
+            Thousands of students worldwide trust ScholarStream to unlock
+            life-changing scholarship opportunities.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* ================= TESTIMONIALS ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
+              transition={{ delay: index * 0.15 }}
+              className="group"
             >
-              {/* Quote Icon */}
-              <div className="mb-6 text-blue-100">
-                <FaQuoteLeft className="text-4xl" />
-              </div>
+              {/* Glass Card */}
+              <div className="h-full rounded-3xl p-8 bg-white/70 backdrop-blur-xl
+                border border-white/40 shadow-lg hover:shadow-2xl transition-all duration-300 relative">
 
-              {/* Quote Text */}
-              <p className="text-gray-600 italic mb-6 flex-grow leading-relaxed">
-                "{testimonial.quote}"
-              </p>
+                {/* Quote Icon */}
+                <FaQuoteLeft className="text-4xl text-indigo-100 mb-6" />
 
-              {/* Rating */}
-              <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar
-                    key={i}
-                    className={`text-sm ${
-                      i < testimonial.rating
-                        ? "text-yellow-400"
-                        : "text-gray-300"
-                    }`}
-                  />
-                ))}
-              </div>
+                {/* Quote */}
+                <p className="text-gray-700 italic leading-relaxed mb-8">
+                  “{testimonial.quote}”
+                </p>
 
-              {/* User Profile */}
-              <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
-                <div className="relative">
+                {/* Rating */}
+                <div className="flex gap-1 mb-8">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar
+                      key={i}
+                      className={`text-sm ${
+                        i < testimonial.rating
+                          ? "text-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* User Info */}
+                <div className="flex items-center gap-4 pt-6 border-t border-gray-200">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md"
-                    onError={(e) => {
-                      e.target.src = `https://ui-avatars.com/api/?name=${testimonial.name}&background=random`;
-                    }}
+                    className="w-14 h-14 rounded-full object-cover shadow-md"
                   />
-                  <div className="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+                  <div>
+                    <h4 className="font-bold text-gray-800">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-sm text-indigo-600 font-semibold">
+                      {testimonial.university}
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      {testimonial.location}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-gray-800">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-xs text-blue-600 font-semibold mb-0.5">
-                    {testimonial.university}
-                  </p>
-                  <p className="text-xs text-gray-400">
-                    {testimonial.location}
-                  </p>
-                </div>
+
+                {/* Hover Glow */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br
+                  from-indigo-300 to-purple-300 opacity-0 group-hover:opacity-20
+                  blur-2xl transition-opacity -z-10"></div>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );
